@@ -1,0 +1,402 @@
+from IPython.display import HTML
+
+HTML(r"""
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Happy Rose Day ❤️</title>
+  <style>
+    :root{
+      --bg1:#120016;
+      --bg2:#2a001f;
+      --card:#ffffff12;
+      --border:#ffffff24;
+      --text:#fff;
+      --muted:#ffffffb3;
+      --accent:#ff3b7a;
+      --accent2:#ffb3c7;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% 10%, #3a0030 0%, transparent 60%),
+                  radial-gradient(900px 700px at 80% 90%, #2b001f 0%, transparent 55%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+    .stars{
+      position:fixed; inset:0;
+      background-image:
+        radial-gradient(#ffffff55 1px, transparent 1px),
+        radial-gradient(#ffffff33 1px, transparent 1px);
+      background-size: 60px 60px, 90px 90px;
+      background-position: 0 0, 25px 35px;
+      opacity:.25;
+      pointer-events:none;
+      filter: blur(.2px);
+    }
+    .float-layer{
+      position:fixed; inset:0;
+      pointer-events:none;
+      z-index:10;
+    }
+    .float{
+      position:absolute;
+      top:-10vh;
+      opacity:.85;
+      animation: fall linear forwards;
+      filter: drop-shadow(0 8px 10px #00000055);
+    }
+    @keyframes fall{
+      to{
+        transform: translate3d(var(--dx), 120vh, 0) rotate(var(--rot));
+        opacity: 0.05;
+      }
+    }
+    .wrap{
+      position:relative;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+    }
+    .card{
+      width:min(760px, 92vw);
+      background: linear-gradient(180deg, #ffffff14, #ffffff0a);
+      border:1px solid var(--border);
+      border-radius:24px;
+      box-shadow: 0 30px 80px #00000066;
+      backdrop-filter: blur(10px);
+      padding:28px;
+      position:relative;
+      overflow:hidden;
+    }
+    .pulse{
+      position:absolute;
+      left:-80px; bottom:-80px;
+      width:220px;height:220px;
+      background: radial-gradient(circle at 30% 30%, #ff6f9f, #ff1f6b);
+      opacity:.12;
+      border-radius:999px;
+      filter: blur(2px);
+      animation: pulse 3.8s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes pulse{
+      0%,100%{transform: scale(1)}
+      50%{transform: scale(1.12)}
+    }
+    .rose{
+      width:54px;height:54px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background: radial-gradient(circle at 30% 30%, #ff7aa7, #ff2f74 65%, #b10043 100%);
+      box-shadow: 0 20px 50px #ff2f7433;
+      position:absolute;
+      right:20px;
+      top:20px;
+      transform: rotate(8deg);
+      border:1px solid #ffffff22;
+      user-select:none;
+    }
+    .rose span{font-size:28px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:#ffffff12;
+      border:1px solid #ffffff22;
+      color:var(--muted);
+      font-size:14px;
+      letter-spacing:.2px;
+    }
+    .title{
+      margin:14px 0 10px;
+      font-size: clamp(30px, 4vw, 44px);
+      line-height:1.05;
+      font-weight:800;
+    }
+    .title .accent{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .subtitle{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-size: clamp(15px, 2vw, 18px);
+      line-height:1.6;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:18px;
+      margin-top:18px;
+    }
+    @media (max-width: 780px){ .grid{grid-template-columns:1fr} }
+    .panel{
+      border:1px solid #ffffff22;
+      background:#ffffff10;
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+    }
+    .panel h3{
+      margin:0 0 10px;
+      font-size:16px;
+      letter-spacing:.2px;
+      color:#fff;
+    }
+    .panel p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:15px;
+    }
+    .big-note{
+      margin-top:10px;
+      padding:14px;
+      border-radius:18px;
+      background:#ffffff10;
+      border:1px solid #ffffff22;
+      color:#fff;
+      line-height:1.7;
+      white-space:pre-wrap;
+      font-size:15px;
+    }
+    .actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:14px;
+      align-items:center;
+    }
+    button{
+      border:none;
+      cursor:pointer;
+      padding:12px 16px;
+      border-radius:14px;
+      font-weight:700;
+      font-size:15px;
+      transition: transform .08s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .btn-primary{
+      background: linear-gradient(90deg, var(--accent), #ff5aa1);
+      color:#fff;
+      box-shadow: 0 14px 30px #ff3b7a33;
+    }
+    .btn-primary:hover{box-shadow: 0 18px 36px #ff3b7a4a}
+    .btn-primary:active{transform: translateY(1px) scale(.99)}
+    .btn-ghost{
+      background:#ffffff12;
+      color:#fff;
+      border:1px solid #ffffff26;
+    }
+    .btn-ghost:hover{background:#ffffff18}
+    .btn-ghost:active{transform: translateY(1px) scale(.99)}
+    .footer{ margin-top:12px; color:#ffffffa6; font-size:13px; }
+
+    .overlay{
+      position:fixed; inset:0;
+      background:#00000066;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      z-index:50;
+    }
+    .overlay.show{display:flex}
+    .modal{
+      width:min(680px, 92vw);
+      background: linear-gradient(180deg, #210017, #14000f);
+      border:1px solid #ffffff22;
+      border-radius:24px;
+      padding:22px;
+      box-shadow: 0 30px 90px #00000099;
+      position:relative;
+      overflow:hidden;
+    }
+    .modal h2{margin:0 0 8px;font-size:26px}
+    .modal p{margin:0 0 14px;color:#ffffffcc;line-height:1.6;font-size:16px}
+    .modal .note{
+      padding:14px;
+      border-radius:18px;
+      background:#ffffff10;
+      border:1px solid #ffffff22;
+      color:#fff;
+      line-height:1.65;
+      white-space:pre-wrap;
+      font-size:15px;
+    }
+    .close{
+      position:absolute;
+      right:14px; top:14px;
+      width:42px;height:42px;
+      border-radius:14px;
+      border:1px solid #ffffff22;
+      background:#ffffff10;
+      color:#fff;
+      font-size:18px;
+      display:grid;
+      place-items:center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stars"></div>
+  <div class="float-layer" id="floatLayer"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="pulse"></div>
+      <div class="rose" aria-hidden="true"><span>🌹</span></div>
+
+      <div class="badge">🌹 Rose Day • A little love note</div>
+      <h1 class="title">Happy <span class="accent">Rose Day</span>, <span id="gfNameText"></span> ❤️</h1>
+      <p class="subtitle" id="mainLine"></p>
+
+      <div class="grid">
+        <div class="panel">
+          <h3>Your message</h3>
+          <div class="big-note" id="staticNote"></div>
+
+          <div class="actions">
+            <button class="btn-primary" id="surpriseBtn">Reveal surprise 💌</button>
+            <button class="btn-ghost" id="petalsBtn">More petals 🌸</button>
+          </div>
+          <div class="footer"></div>
+        </div>
+
+        <div class="panel">
+          <h3>Mini poem</h3>
+          <p>
+            A rose for your smile,<br/>
+            A rose for your heart,<br/>
+            A rose for the way you make my world feel like art.<br/>
+            Happy Rose Day, my love. 🌹
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-label="Surprise message">
+    <div class="modal">
+      <button class="close" id="closeBtn" aria-label="Close">✕</button>
+      <h2>For <span id="modalName"></span> 💖</h2>
+      <p>Open this whenever you want to feel extra loved.</p>
+      <div class="note" id="modalNote"></div>
+      <div class="actions" style="margin-top:14px;">
+        <button class="btn-primary" id="copyBtn">Copy message 📋</button>
+        <button class="btn-ghost" id="spawnBtn">Shower petals 🌹</button>
+      </div>
+      <div class="footer">If copy doesn’t work in Colab, download HTML and open in browser.</div>
+    </div>
+  </div>
+
+  <script>
+    // Defaults (your inputs)
+    const DEFAULT_NAME = "Charitha";
+    const DEFAULT_MESSAGE = "Like this rose, my love for you is simple, beautiful, and meant only for you. Every day with you makes my world bloom.";
+
+    const floatLayer = document.getElementById("floatLayer");
+    function rand(min, max){ return Math.random() * (max - min) + min; }
+
+    function spawnFloat(count = 18){
+      const emojis = ["🌹","🌸","💗","💞","🌺","💖","❤️"];
+      for(let i=0;i<count;i++){
+        const el = document.createElement("div");
+        el.className = "float";
+        el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        const left = rand(0, 100);
+        const size = rand(16, 34);
+        const dur = rand(6.5, 12.5);
+        const dx = rand(-25, 25) + "vw";
+        const rot = rand(-360, 360) + "deg";
+        el.style.left = left + "vw";
+        el.style.fontSize = size + "px";
+        el.style.setProperty("--dx", dx);
+        el.style.setProperty("--rot", rot);
+        el.style.animationDuration = dur + "s";
+        el.style.opacity = rand(0.4, 0.95);
+        floatLayer.appendChild(el);
+        setTimeout(() => el.remove(), dur * 1000);
+      }
+    }
+
+    // initial petals + gentle loop
+    spawnFloat(14);
+    setInterval(() => spawnFloat(6), 2500);
+
+    // Put defaults on page
+    document.getElementById("gfNameText").textContent = DEFAULT_NAME;
+    document.getElementById("mainLine").textContent = DEFAULT_MESSAGE;
+
+    document.getElementById("staticNote").textContent =
+`Happy Rose Day, ${DEFAULT_NAME} 🌹
+
+${DEFAULT_MESSAGE}
+
+You’re my favorite person, my calm, and my happiest thought.`;
+
+    // Modal
+    const overlay = document.getElementById("overlay");
+    const surpriseBtn = document.getElementById("surpriseBtn");
+    const closeBtn = document.getElementById("closeBtn");
+    const modalName = document.getElementById("modalName");
+    const modalNote = document.getElementById("modalNote");
+    const copyBtn = document.getElementById("copyBtn");
+    const petalsBtn = document.getElementById("petalsBtn");
+    const spawnBtn = document.getElementById("spawnBtn");
+
+    function buildModalText(){
+      modalName.textContent = DEFAULT_NAME;
+      modalNote.textContent =
+`Happy Rose Day, ${DEFAULT_NAME} 🌹
+
+${DEFAULT_MESSAGE}
+
+If I could give you one thing today,
+it would be the ability to see yourself through my eyes.
+— Yours Bobby ❤️`;
+    }
+
+    surpriseBtn.addEventListener("click", () => {
+      buildModalText();
+      overlay.classList.add("show");
+      spawnFloat(26);
+    });
+
+    closeBtn.addEventListener("click", () => overlay.classList.remove("show"));
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) overlay.classList.remove("show");
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(modalNote.textContent);
+        copyBtn.textContent = "Copied ✅";
+        setTimeout(() => copyBtn.textContent = "Copy message 📋", 1400);
+      }catch{
+        copyBtn.textContent = "Copy failed";
+        setTimeout(() => copyBtn.textContent = "Copy message 📋", 1400);
+      }
+    });
+
+    petalsBtn.addEventListener("click", () => spawnFloat(34));
+    spawnBtn.addEventListener("click", () => spawnFloat(44));
+  </script>
+</body>
+</html>
+""")
